@@ -7,7 +7,6 @@ const App = () => {
   const [error, setError] = React.useState(null);
   const [number, setNumber] = React.useState("");
 
-
   React.useEffect(() => {
     comicApi().then((data) => {
       setComic(data);
@@ -15,37 +14,45 @@ const App = () => {
   }, []);
 
   const handleSearch = () => {
-    if(number >= 1 || number <= 2296){
+    if (number >= 1 || number <= 2296) {
       secondComicApi(number).then((data) => {
-        setComic(data)
-      })
+        setComic(data);
+      });
     }
-  }
+  };
 
   const handleInputNumber = (e) => {
     setNumber(e.target.value);
   };
 
+  const getRandomQuote = (min, max) => {
+    min = 1;
+    max = 2296;
+    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    secondComicApi(randomNumber).then((data) => {
+      setComic(data);
+    });
+  };
+
   if (error) {
     return <p>error</p>;
-  } else if(comic) {
+  } else if (comic) {
     return (
       <div className="App">
         <div>
-          <p>hello</p>
           <p>{comic.safe_title}</p>
           <img src={comic.img} alt={comic.alt} />
         </div>
         <div>
-          <input type="text" onChange={handleInputNumber} value={number}/>
+          <input type="text" onChange={handleInputNumber} value={number} />
           <button onClick={handleSearch}>Search</button>
         </div>
+        <button onClick={getRandomQuote}>Random</button>
       </div>
     );
-  } else{
-    return <p>Loading</p>
+  } else {
+    return <p>Loading</p>;
   }
-  
 };
 
 export default App;
