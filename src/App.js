@@ -43,11 +43,11 @@ const App = () => {
           <p>{comic.safe_title}</p>
           <img src={comic.img} alt={comic.alt} />
         </div>
-        <div>
-          <input type="text" onChange={handleInputNumber} value={number} />
-          <button onClick={handleSearch}>Search</button>
+        <div className="input-container">
+          <input className="search-input" type="text" onChange={handleInputNumber} value={number} />
+          <button className="search-btn" onClick={handleSearch}>Search</button>
         </div>
-        <button onClick={getRandomQuote}>Random</button>
+        <button className="random-btn" onClick={getRandomQuote}>Random</button>
       </div>
     );
   } else {
